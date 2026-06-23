@@ -2,16 +2,10 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "yourdockerhubusername/flask-cicd"
+        IMAGE_NAME = "jyothikakotakadi/flask-cicd"
     }
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                git 'YOUR_GITHUB_REPO_URL'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
@@ -22,7 +16,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub',
+                    credentialsId: 'dockerhub-creds',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
